@@ -24,6 +24,15 @@ def number_of_symbols(input_docx):
     return symbols_num
 
 
+try:
+    os.mkdir(os.getcwd() + "\\texts")
+except FileExistsError:
+    pass
+try:
+    os.mkdir(os.getcwd() + "\\output")
+except FileExistsError:
+    pass
+
 list_of_files = os.listdir(path=os.getcwd() + "\\texts")
 if len(list_of_files) > 1:
     merge_files(list_of_files)
@@ -35,7 +44,7 @@ except docx.opc.exceptions.PackageNotFoundError:
 
 
 parts_num = input("Please specify the number of parts\n")
-part_length = number_of_symbols(sum_file) / int(parts_num)
+part_length = int(number_of_symbols(sum_file) / int(parts_num))
 list_of_output = []
 num = 0
 i = 0

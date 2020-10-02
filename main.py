@@ -9,7 +9,7 @@ def merge_files(list_of_files):
         for paragraph in current_file.paragraphs:
             sum_file.add_paragraph(paragraph.text)
 
-    sum_file.save('merge_output.docx')
+    sum_file.save('merged_output.docx')
 
 
 def create_new_docx():
@@ -38,7 +38,7 @@ if len(list_of_files) > 1:
     merge_files(list_of_files)
 
 try:
-    sum_file = docx.Document('merge_output.docx')
+    sum_file = docx.Document('merged_output.docx')
 except docx.opc.exceptions.PackageNotFoundError:
     sum_file = docx.Document('input.docx')
 

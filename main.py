@@ -3,13 +3,13 @@ import os
 
 
 def merge_files(list_of_files):
-    sum_file = docx.Document()
-    for file in list_of_files:
-        current_file = docx.Document(os.getcwd() + "\\texts\\" + str(file))
+    merged_file = docx.Document()
+    for filename in list_of_files:
+        current_file = docx.Document(os.path.join(os.getcwd(), 'texts', str(filename)))
         for paragraph in current_file.paragraphs:
-            sum_file.add_paragraph(paragraph.text)
+            merged_file.add_paragraph(paragraph.text)
 
-    sum_file.save('merged_output.docx')
+    merged_file.save('merged_output.docx')
 
 
 def create_new_docx():
@@ -25,15 +25,15 @@ def number_of_symbols(input_docx):
 
 
 try:
-    os.mkdir(os.getcwd() + "\\texts")
+    os.mkdir(os.path.join(os.getcwd(), "texts"))
 except FileExistsError:
     pass
 try:
-    os.mkdir(os.getcwd() + "\\output")
+    os.mkdir(os.path.join(os.getcwd(), "output"))
 except FileExistsError:
     pass
 
-list_of_files = os.listdir(path=os.getcwd() + "\\texts")
+list_of_files = os.listdir(path=os.path.join(os.getcwd(), "texts"))
 if len(list_of_files) > 1:
     merge_files(list_of_files)
 
@@ -57,8 +57,8 @@ for paragraph in sum_file.paragraphs:
 
     if num >= part_length:
         num = 0
-        list_of_output[i].save(os.getcwd() + "\\output\\" + str(i) + '.docx')
+        list_of_output[i].save(os.path.join(os.getcwd(), "output", f'{str(i)}.docx'))
         i += 1
         list_of_output.append(create_new_docx())
 
-list_of_output[i].save(os.getcwd() + "\\output\\" + str(i) + '.docx')
+list_of_output[i].save(os.path.join(os.getcwd(), "output", f'{str(i)}.docx'))
